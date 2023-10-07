@@ -1,0 +1,82 @@
+import '../src/style.css';
+
+export const modal = document.createElement("div")
+modal.classList.add("modal")
+
+
+var formContainer  = document.createElement("div")
+formContainer.classList.add("form-container")
+var form = document.createElement("form");
+form.setAttribute("method", "post");
+form.setAttribute("action", "submit.php");
+
+
+//title
+var title = document.createElement("input");
+title.setAttribute("type", "text");
+title.setAttribute("name", "todoTitle");
+title.setAttribute("placeholder", "todo title");
+var titleLabel = document.createElement("label")
+titleLabel.textContent = "Title:"
+formContainer.appendChild(titleLabel)
+formContainer.appendChild(title)
+
+//description
+var description = document.createElement("textarea");
+description.setAttribute("name", "todoDescription");
+description.setAttribute("placeholder", "describe your todo");
+var descriptionLabel = document.createElement("label")
+descriptionLabel.textContent = "Description:"
+formContainer.appendChild(descriptionLabel)
+formContainer.appendChild(description)
+
+//duedate
+var dueDate = document.createElement("input");
+dueDate.classList.add("modal-content")
+dueDate.setAttribute("type", "date");
+dueDate.setAttribute("name", "todoDate");
+var dateLabel = document.createElement("label")
+dateLabel.textContent = "Due date:"
+formContainer.appendChild(dateLabel)
+formContainer.appendChild(dueDate)
+
+// Select priority
+// Create a select element
+const priority = document.createElement("select");
+priority.setAttribute("name", "priority");
+priority.classList.add("modal-content")
+const priorityLabel = document.createElement("label")
+priorityLabel.textContent = "Priority:"
+
+// Create option elements and add them to the select element
+const priorities = ["Low", "Medium", "High"];
+priorities.forEach((optionText) => {
+  const option = document.createElement("option");
+  option.setAttribute("value", optionText.toLowerCase());
+  option.textContent = optionText;
+  priority.appendChild(option);
+});
+formContainer.appendChild(priorityLabel)
+formContainer.appendChild(priority)
+
+formContainer.appendChild(document.createElement("br"))
+
+//submit button
+var submit = document.createElement("button");
+
+submit.setAttribute("type", "submit");
+submit.setAttribute("name", "submit");
+submit.textContent = "Create todo"
+formContainer.appendChild(submit)
+
+
+modal.appendChild(formContainer)
+
+
+
+//close modal with click outside window
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
