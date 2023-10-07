@@ -1,0 +1,60 @@
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+h1{
+    margin: 0;
+    padding: 20px;
+    border: gold 10px solid;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+#flex-container{
+    display: flex;
+    align-items: stretch;
+    background-color: #6a9cff;
+    flex-grow : 1;
+  }
+
+#projects{
+    background-color: blue;
+    flex: 1 1 400px;
+    min-width: 400px;
+    max-width: 400px;
+    padding-left: 10px;
+   
+}
+#todo-container{
+    background-color: aqua;
+    flex: 5 2 auto;
+}
+
+
+
+.todo{
+  
+    background-color: blueviolet;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 100px;
+    padding-left: 100px;
+    border: white 1px solid;
+    font-size: 3rem;
+}
+
+.todo > p{
+    margin: 0;
+    padding: 0;
+}
+
+.active{
+    background-color: chocolate;
+    color: beige;
+}

@@ -1,0 +1,16 @@
+
+TODO ITEM 
+    title
+    description
+    dueDate
+    priority (high priority, normal priority)
+
+ACTIONS
+    create todo 
+    open/collapse todo 
+    edit todo 
+    finish todo -> add to finished list
+    remove todo
+    
+
+
