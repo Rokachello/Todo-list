@@ -1,4 +1,6 @@
-import { projectContainer } from "./domElements";
+import { projectContainer, projects} from "./domElements";
+
+
 
 
 export class projectItem{
@@ -12,3 +14,5 @@ export class projectItem{
     }
     
 }
+
+

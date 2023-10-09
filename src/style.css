@@ -36,6 +36,14 @@ h1{
     flex: 5 2 auto;
 }
 
+#projects > p {
+    font-size: 2rem;
+}
+#projects > p:hover{
+    color: aliceblue;
+    cursor:pointer;
+} 
+
 
 
 .todo{
@@ -49,7 +57,8 @@ h1{
     font-size: 3rem;
 }
 
-.todo > p{
+.todo > p,
+.todo > h2{
     margin: 0;
     padding: 0;
 }

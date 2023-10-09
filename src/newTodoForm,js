@@ -1,4 +1,7 @@
 import '../src/style.css';
+import { TodoItem } from './todoItem';
+import { test } from './todoItem';
+import { refreshContent, currentTodoList, all,past,work,personal } from '.';
 
 export const modal = document.createElement("div")
 modal.classList.add("modal")
@@ -13,6 +16,7 @@ form.setAttribute("action", "submit.php");
 
 //title
 var title = document.createElement("input");
+title.required = true
 title.setAttribute("type", "text");
 title.setAttribute("name", "todoTitle");
 title.setAttribute("placeholder", "todo title");
@@ -32,6 +36,7 @@ formContainer.appendChild(description)
 
 //duedate
 var dueDate = document.createElement("input");
+dueDate.required = true
 dueDate.classList.add("modal-content")
 dueDate.setAttribute("type", "date");
 dueDate.setAttribute("name", "todoDate");
@@ -63,11 +68,29 @@ formContainer.appendChild(document.createElement("br"))
 
 //submit button
 var submit = document.createElement("button");
-
-submit.setAttribute("type", "submit");
-submit.setAttribute("name", "submit");
 submit.textContent = "Create todo"
 formContainer.appendChild(submit)
+
+submit.addEventListener("click", () => {
+    const newTitle = title.value;
+    const newDescription = description.value;
+    const newDueDate = new Date(dueDate.value);
+    const newPriority = priority.value;
+
+    if(newTitle == ""){
+        alert("you need to add title")
+    } else if(isNaN(newDueDate)) {
+        alert("set valid date")
+    } else {
+    const newTodo = new TodoItem(newTitle, newDescription, newDueDate, newPriority);
+   
+    currentTodoList.push(newTodo)
+    
+   resetForms()
+   modal.style.display = "none";
+   refreshContent()
+    }
+});
 
 
 modal.appendChild(formContainer)
@@ -78,5 +101,13 @@ modal.appendChild(formContainer)
 window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
+      resetForms()
     }
+  }
+
+  const resetForms = function(){
+    title.value = '';
+    description.value = '';
+    dueDate.value = '';
+    priority.value = 'Low'; // Set the default value if needed
   }

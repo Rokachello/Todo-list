@@ -1,5 +1,6 @@
 import { todoElement } from "./domElements";
 import { icons } from "./domElements";
+import { currentTodoList } from ".";
 
 
 export class TodoItem {
@@ -15,14 +16,20 @@ export class TodoItem {
   }
 }
 
-// test items
-let t1 = new TodoItem( "Eat breakfast", "scrambled eggs with fresh juice", new Date("2025-03-25"), "medium");
-let t2 = new TodoItem( "Take out trash", "bio on monday", new Date("2024-04-25"), "high");
+function compare( a, b ) {
+  if ( daysUntilTodo(a.dueDate) < daysUntilTodo(b.dueDate) ){
+    return -1;
+  }
+  if (daysUntilTodo(a.dueDate) > daysUntilTodo(b.dueDate) ){
+    return 1;
+  }
+  return 0;
+}
 
-export let test = [t1, t2];
 
 export const createTodosFromList = function(list) {
   const todos = document.createElement("div")
+  list.sort(compare)
   list.forEach(element => {
     let currentTodo = createTodo(element)
     todos.appendChild(currentTodo)
@@ -31,7 +38,7 @@ export const createTodosFromList = function(list) {
 };
 
 
-const daysUntilTodo = function(dueDate){
+export const daysUntilTodo = function(dueDate){
   const now = Date.now()
   const date = dueDate
   const time = date - now
@@ -39,7 +46,7 @@ const daysUntilTodo = function(dueDate){
   }
   
 
-const createTodo = function(todo){
+export const createTodo = function(todo){
   const todoElement = document.createElement("div")
   //COLLAPSED
   const todoElementCollapsed = document.createElement("div")
@@ -50,7 +57,7 @@ const createTodo = function(todo){
   const expand = document.createElement("img")
   expand.src = "../src/images/icons8-expand-arrow-50.png"
   title.textContent = todo.title
-  daysLeft.textContent = "in " + daysUntilTodo(todo.dueDate) + " days"
+  daysLeft.textContent = "in " + (daysUntilTodo(todo.dueDate)+1) + " days"
     todoElementCollapsed.appendChild(title)
     todoElementCollapsed.appendChild(daysLeft)
     todoElementCollapsed.appendChild(expand)
@@ -62,8 +69,8 @@ const createTodo = function(todo){
   const description = document.createElement("p")
   description.textContent = todo.description
   const date = document.createElement("p")
-  date.textContent = todo.dueDate.getDate() + "." 
-  + (todo.dueDate.getMonth()+1)+ "." + todo.dueDate.getFullYear()
+  let dateFormat = todo.dueDate.getDate() + "." +(todo.dueDate.getMonth()+1)+ "." + todo.dueDate.getFullYear()
+  date.textContent = dateFormat
   todoElementExpanded.appendChild(description)
   todoElementExpanded.appendChild(date)
   todoElement.appendChild(todoElementExpanded)
@@ -78,8 +85,6 @@ const createTodo = function(todo){
     }
   }
   )
-
   return todoElement
-
 }
 
